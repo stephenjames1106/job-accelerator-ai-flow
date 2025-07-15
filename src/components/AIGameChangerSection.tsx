@@ -1,99 +1,272 @@
-import { CheckCircle, TrendingUp, Clock, Star } from "lucide-react";
+import { MessageSquare, Bot, Star, Calculator, CheckCircle, Clock, Zap, TrendingUp } from "lucide-react";
 
 export const AIGameChangerSection = () => {
   return (
-    <section className="py-20 bg-background">
+    <section className="py-24 bg-background">
       <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-              AI Is Changing The Game — And The 
-              <span className="text-primary block">Smartest Contractors Are Already Cashing In</span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              While most contractors are still manually handling calls and reviews, early adopters are 
-              automating their way to bigger profits and more free time.
-            </p>
-          </div>
-
-          {/* Stats Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            <div className="bg-card p-6 rounded-lg shadow-card text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-3xl font-bold text-foreground mb-2">78%</h3>
-              <p className="text-muted-foreground">of contractors miss calls during busy hours</p>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+            What You Get With <span className="text-primary">OptimaxAI</span>
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Smart Services That Work While You Don't
+          </p>
+          <div className="flex items-center justify-center gap-8 mt-8">
+            <div className="flex items-center gap-2">
+              <Clock className="w-5 h-5 text-success" />
+              <span className="text-success font-medium">24/7 Automation</span>
             </div>
-            
-            <div className="bg-card p-6 rounded-lg shadow-card text-center">
-              <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="w-8 h-8 text-success" />
-              </div>
-              <h3 className="text-3xl font-bold text-foreground mb-2">3x</h3>
-              <p className="text-muted-foreground">faster response times with AI automation</p>
+            <div className="flex items-center gap-2">
+              <Zap className="w-5 h-5 text-primary" />
+              <span className="text-primary font-medium">Instant Response</span>
             </div>
-            
-            <div className="bg-card p-6 rounded-lg shadow-card text-center">
-              <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Clock className="w-8 h-8 text-accent" />
-              </div>
-              <h3 className="text-3xl font-bold text-foreground mb-2">24/7</h3>
-              <p className="text-muted-foreground">AI works while you sleep, vacation, or focus on jobs</p>
-            </div>
-            
-            <div className="bg-card p-6 rounded-lg shadow-card text-center">
-              <div className="w-16 h-16 bg-warning/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="w-8 h-8 text-warning" />
-              </div>
-              <h3 className="text-3xl font-bold text-foreground mb-2">4.8★</h3>
-              <p className="text-muted-foreground">average review rating with automated follow-ups</p>
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-accent" />
+              <span className="text-accent font-medium">More Revenue</span>
             </div>
           </div>
+        </div>
 
-          {/* Benefits List */}
-          <div className="bg-muted/50 rounded-lg p-8 md:p-12">
-            <h3 className="text-2xl font-bold mb-8 text-center text-foreground">
-              Why Early Adopters Are Winning Right Now
+        <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          {/* Missed-Call Text-Back AI */}
+          <div className="bg-card rounded-2xl p-8 border border-border">
+            <div className="w-12 h-12 bg-success/20 rounded-lg flex items-center justify-center mb-6">
+              <MessageSquare className="w-6 h-6 text-success" />
+            </div>
+            
+            <h3 className="text-xl font-bold mb-4 text-foreground">
+              📲 Missed-Call Text-Back AI
             </h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-success mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold mb-2">Instant Response = More Jobs</h4>
-                  <p className="text-muted-foreground">Customers call the first contractor who answers. AI ensures you're always first.</p>
-                </div>
+            
+            <div className="space-y-3 mb-6">
+              <div className="bg-success/10 p-3 rounded-lg">
+                <div className="text-sm text-success font-medium">✅ Missed call detected</div>
               </div>
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-success mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold mb-2">24/7 Lead Qualification</h4>
-                  <p className="text-muted-foreground">AI pre-qualifies leads and schedules only serious prospects.</p>
-                </div>
+              <div className="bg-success/10 p-3 rounded-lg">
+                <div className="text-sm text-success font-medium">✅ AI responds in 3s</div>
               </div>
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-success mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold mb-2">Automatic Review Generation</h4>
-                  <p className="text-muted-foreground">Get more 5-star reviews without lifting a finger.</p>
-                </div>
+              <div className="bg-success/10 p-3 rounded-lg">
+                <div className="text-sm text-success font-medium">✅ Lead captured</div>
               </div>
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-success mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold mb-2">Professional Image</h4>
-                  <p className="text-muted-foreground">Customers prefer businesses that seem modern and responsive.</p>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-success">3s</div>
+                <div className="text-xs text-muted-foreground">RESPONSE TIME</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-success">Auto</div>
+                <div className="text-xs text-muted-foreground">BOOKING</div>
+              </div>
+            </div>
+            
+            <p className="text-muted-foreground text-sm mb-6">
+              Auto-responds to missed calls instantly with a full SMS conversation and booking.
+            </p>
+            
+            <div className="space-y-2">
+              <h4 className="font-medium text-foreground">Key Features:</h4>
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-success" />
+                  <span className="text-sm text-muted-foreground">Instant SMS responses</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-success" />
+                  <span className="text-sm text-muted-foreground">Lead qualification</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-success" />
+                  <span className="text-sm text-muted-foreground">Appointment booking</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-success" />
+                  <span className="text-sm text-muted-foreground">24/7 availability</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Call to Action */}
-          <div className="text-center mt-12">
-            <p className="text-lg text-muted-foreground mb-4">
-              <strong>Your competitors are already using AI.</strong> Are you ready to keep up — or are you handing them your next job?
+          {/* Website Chatbot */}
+          <div className="bg-card rounded-2xl p-8 border border-border">
+            <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
+              <Bot className="w-6 h-6 text-primary" />
+            </div>
+            
+            <h3 className="text-xl font-bold mb-4 text-foreground">
+              🤖 Website Chatbot
+            </h3>
+            
+            <div className="space-y-3 mb-6">
+              <div className="bg-primary/10 p-3 rounded-lg">
+                <div className="text-sm text-primary font-medium">👤 Visitor detected</div>
+              </div>
+              <div className="bg-primary/10 p-3 rounded-lg">
+                <div className="text-sm text-primary font-medium">💬 Chat initiated</div>
+              </div>
+              <div className="bg-primary/10 p-3 rounded-lg">
+                <div className="text-sm text-primary font-medium">🎯 Lead converted</div>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-primary">3x</div>
+                <div className="text-xs text-muted-foreground">MORE CONVERSIONS</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-primary">24/7</div>
+                <div className="text-xs text-muted-foreground">ACTIVE</div>
+              </div>
+            </div>
+            
+            <p className="text-muted-foreground text-sm mb-6">
+              Converts 2-3x more leads by chatting with visitors and collecting their info in real time.
             </p>
+            
+            <div className="space-y-2">
+              <h4 className="font-medium text-foreground">Key Features:</h4>
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-primary" />
+                  <span className="text-sm text-muted-foreground">Live chat widget</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-primary" />
+                  <span className="text-sm text-muted-foreground">Lead capture forms</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-primary" />
+                  <span className="text-sm text-muted-foreground">Real-time notifications</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-primary" />
+                  <span className="text-sm text-muted-foreground">CRM integration</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Review Automation */}
+          <div className="bg-card rounded-2xl p-8 border border-border">
+            <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mb-6">
+              <Star className="w-6 h-6 text-accent" />
+            </div>
+            
+            <h3 className="text-xl font-bold mb-4 text-foreground">
+              📝 Review Automation
+            </h3>
+            
+            <div className="space-y-3 mb-6">
+              <div className="bg-accent/10 p-3 rounded-lg">
+                <div className="text-sm text-accent font-medium">⭐ Review sent</div>
+              </div>
+              <div className="bg-accent/10 p-3 rounded-lg">
+                <div className="text-sm text-accent font-medium">🚀 Reputation boost</div>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-accent">5⭐</div>
+                <div className="text-xs text-muted-foreground">AVERAGE RATING</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-accent">Auto</div>
+                <div className="text-xs text-muted-foreground">FOLLOW-UP</div>
+              </div>
+            </div>
+            
+            <p className="text-muted-foreground text-sm mb-6">
+              Sends follow-ups that get 5-star reviews — boosting your Google ranking and reputation.
+            </p>
+            
+            <div className="space-y-2">
+              <h4 className="font-medium text-foreground">Key Features:</h4>
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-accent" />
+                  <span className="text-sm text-muted-foreground">Automated review requests</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-accent" />
+                  <span className="text-sm text-muted-foreground">Google My Business sync</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-accent" />
+                  <span className="text-sm text-muted-foreground">Review management</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-accent" />
+                  <span className="text-sm text-muted-foreground">Reputation monitoring</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* AI Estimator */}
+          <div className="bg-card rounded-2xl p-8 border border-border relative">
+            <div className="absolute top-4 right-4 bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full">
+              ⚡ Optional Add-On
+            </div>
+            
+            <div className="w-12 h-12 bg-warning/20 rounded-lg flex items-center justify-center mb-6">
+              <Calculator className="w-6 h-6 text-warning" />
+            </div>
+            
+            <h3 className="text-xl font-bold mb-4 text-foreground">
+              🔧 AI Estimator
+            </h3>
+            
+            <div className="space-y-3 mb-6">
+              <div className="bg-warning/10 p-3 rounded-lg">
+                <div className="text-sm text-warning font-medium">📊 Analyzing data</div>
+              </div>
+              <div className="bg-warning/10 p-3 rounded-lg">
+                <div className="text-sm text-warning font-medium">📋 Quote generated</div>
+              </div>
+              <div className="bg-warning/10 p-3 rounded-lg">
+                <div className="text-sm text-warning font-medium">⚡ 90% time saved</div>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-warning">90%</div>
+                <div className="text-xs text-muted-foreground">TIME SAVED</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-warning">Auto</div>
+                <div className="text-xs text-muted-foreground">QUOTES</div>
+              </div>
+            </div>
+            
+            <p className="text-muted-foreground text-sm mb-6">
+              Our AI learns from your past estimates to generate accurate, fast quotes — saving you 80-90% of time.
+            </p>
+            
+            <div className="space-y-2">
+              <h4 className="font-medium text-foreground">Key Features:</h4>
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-warning" />
+                  <span className="text-sm text-muted-foreground">Smart pricing</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-warning" />
+                  <span className="text-sm text-muted-foreground">Historical data analysis</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-warning" />
+                  <span className="text-sm text-muted-foreground">Custom templates</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-warning" />
+                  <span className="text-sm text-muted-foreground">Instant proposals</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
