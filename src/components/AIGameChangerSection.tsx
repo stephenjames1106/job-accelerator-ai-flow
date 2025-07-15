@@ -1,4 +1,4 @@
-import { MessageSquare, Bot, Star, Calculator, CheckCircle, Clock, Zap, TrendingUp } from "lucide-react";
+import { MessageSquare, Bot, Star, Calculator, CheckCircle, Clock, Zap, TrendingUp, Phone } from "lucide-react";
 
 export const AIGameChangerSection = () => {
   return (
@@ -35,7 +35,7 @@ export const AIGameChangerSection = () => {
             </div>
             
             <h3 className="text-xl font-bold mb-4 text-foreground">
-              📲 Missed-Call Text-Back AI
+              📲 AI Receptionist & Text-Back
             </h3>
             
             <div className="space-y-3 mb-6">
@@ -62,7 +62,7 @@ export const AIGameChangerSection = () => {
             </div>
             
             <p className="text-muted-foreground text-sm mb-6">
-              Auto-responds to missed calls instantly with a full SMS conversation and booking.
+              AI receptionist handles all inbound calls, books appointments on autopilot, and knows everything about your business to answer any question. Works 24/7, never misses opportunities because your hours are closed.
             </p>
             
             <div className="space-y-2">
@@ -70,19 +70,19 @@ export const AIGameChangerSection = () => {
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-success" />
-                  <span className="text-sm text-muted-foreground">Instant SMS responses</span>
+                  <span className="text-sm text-muted-foreground">Handles all inbound calls</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-success" />
-                  <span className="text-sm text-muted-foreground">Lead qualification</span>
+                  <span className="text-sm text-muted-foreground">Books appointments automatically</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-success" />
-                  <span className="text-sm text-muted-foreground">Appointment booking</span>
+                  <span className="text-sm text-muted-foreground">Knows everything about your business</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-success" />
-                  <span className="text-sm text-muted-foreground">24/7 availability</span>
+                  <span className="text-sm text-muted-foreground">Provides customer support 24/7</span>
                 </div>
               </div>
             </div>
@@ -95,7 +95,7 @@ export const AIGameChangerSection = () => {
             </div>
             
             <h3 className="text-xl font-bold mb-4 text-foreground">
-              🤖 Website Chatbot
+              🤖 Website & Social Media Chatbot
             </h3>
             
             <div className="space-y-3 mb-6">
@@ -122,7 +122,7 @@ export const AIGameChangerSection = () => {
             </div>
             
             <p className="text-muted-foreground text-sm mb-6">
-              Converts 2-3x more leads by chatting with visitors and collecting their info in real time.
+              Smart chatbot that qualifies leads and books appointments from your website, Facebook, and Instagram pages - all while you sleep.
             </p>
             
             <div className="space-y-2">
@@ -130,19 +130,19 @@ export const AIGameChangerSection = () => {
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  <span className="text-sm text-muted-foreground">Live chat widget</span>
+                  <span className="text-sm text-muted-foreground">Website chat widget</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  <span className="text-sm text-muted-foreground">Lead capture forms</span>
+                  <span className="text-sm text-muted-foreground">Facebook & Instagram integration</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  <span className="text-sm text-muted-foreground">Real-time notifications</span>
+                  <span className="text-sm text-muted-foreground">Books appointments across platforms</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  <span className="text-sm text-muted-foreground">CRM integration</span>
+                  <span className="text-sm text-muted-foreground">Real-time lead capture</span>
                 </div>
               </div>
             </div>
@@ -155,7 +155,7 @@ export const AIGameChangerSection = () => {
             </div>
             
             <h3 className="text-xl font-bold mb-4 text-foreground">
-              📝 Review Automation
+              📝 Google Review Automation
             </h3>
             
             <div className="space-y-3 mb-6">
@@ -179,7 +179,7 @@ export const AIGameChangerSection = () => {
             </div>
             
             <p className="text-muted-foreground text-sm mb-6">
-              Sends follow-ups that get 5-star reviews — boosting your Google ranking and reputation.
+              Automated texts request reviews with gift card incentives. Reviews below 4 stars go directly to you to make it right. Boosts Google SEO to rank higher when customers search for services in your area.
             </p>
             
             <div className="space-y-2">
@@ -187,19 +187,19 @@ export const AIGameChangerSection = () => {
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-accent" />
-                  <span className="text-sm text-muted-foreground">Automated review requests</span>
+                  <span className="text-sm text-muted-foreground">Gift card incentives (we pay)</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-accent" />
-                  <span className="text-sm text-muted-foreground">Google My Business sync</span>
+                  <span className="text-sm text-muted-foreground">Bad reviews filtered to you first</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-accent" />
-                  <span className="text-sm text-muted-foreground">Review management</span>
+                  <span className="text-sm text-muted-foreground">Boosts Google SEO rankings</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-accent" />
-                  <span className="text-sm text-muted-foreground">Reputation monitoring</span>
+                  <span className="text-sm text-muted-foreground">Automated text requests</span>
                 </div>
               </div>
             </div>
