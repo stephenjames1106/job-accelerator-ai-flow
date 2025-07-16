@@ -2,8 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Star, Zap } from "lucide-react";
+import { CalendarModal } from "./CalendarModal";
+import { useState } from "react";
 
 export const PricingSection = () => {
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  
   return (
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -173,12 +177,18 @@ export const PricingSection = () => {
             <p className="text-muted-foreground mb-6">
               Book a strategy call to see which system is right for your business.
             </p>
-            <Button size="lg" className="bg-primary hover:bg-primary-dark">
+            <Button 
+              size="lg" 
+              className="bg-primary hover:bg-primary-dark"
+              onClick={() => setIsCalendarOpen(true)}
+            >
               Book Strategy Call
             </Button>
           </div>
         </div>
       </div>
+      
+      <CalendarModal isOpen={isCalendarOpen} onClose={() => setIsCalendarOpen(false)} />
     </section>
   );
 };

@@ -1,8 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Settings, Zap, TrendingUp } from "lucide-react";
+import { CalendarModal } from "./CalendarModal";
+import { useState } from "react";
 
 export const HowItWorksSection = () => {
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  
   return (
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -90,12 +94,18 @@ export const HowItWorksSection = () => {
             <p className="text-muted-foreground mb-6">
               Stop losing jobs to competitors who respond faster. Get your AI system running today.
             </p>
-            <Button size="lg" className="bg-primary hover:bg-primary-dark">
+            <Button 
+              size="lg" 
+              className="bg-primary hover:bg-primary-dark"
+              onClick={() => setIsCalendarOpen(true)}
+            >
               Start Your Setup Now
             </Button>
           </div>
         </div>
       </div>
+      
+      <CalendarModal isOpen={isCalendarOpen} onClose={() => setIsCalendarOpen(false)} />
     </section>
   );
 };

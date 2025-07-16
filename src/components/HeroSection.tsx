@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { PhoneCall, Zap, TrendingUp, Star } from "lucide-react";
+import { CalendarModal } from "./CalendarModal";
+import { useState } from "react";
 
 export const HeroSection = () => {
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  
   return (
     <section className="relative min-h-screen bg-background flex items-center justify-center overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
@@ -36,7 +40,11 @@ export const HeroSection = () => {
             
             {/* CTA buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-4 text-lg">
+              <Button 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-4 text-lg"
+                onClick={() => setIsCalendarOpen(true)}
+              >
                 🔥 Book a Free Demo
               </Button>
               <Button size="lg" variant="outline" className="border-primary/30 text-primary hover:bg-primary/10 font-semibold px-8 py-4 text-lg">
@@ -128,6 +136,8 @@ export const HeroSection = () => {
           </div>
         </div>
       </div>
+      
+      <CalendarModal isOpen={isCalendarOpen} onClose={() => setIsCalendarOpen(false)} />
     </section>
   );
 };

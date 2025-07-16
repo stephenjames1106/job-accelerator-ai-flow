@@ -2,8 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { PhoneCall, MessageCircle, Calendar, CheckCircle } from "lucide-react";
+import { CalendarModal } from "./CalendarModal";
+import { useState } from "react";
 
 export const LiveDemoSection = () => {
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -132,12 +136,18 @@ export const LiveDemoSection = () => {
             <p className="text-muted-foreground mb-6">
               AI isn't coming — it's already here. And it's booking jobs for your competitors while you're still checking voicemails.
             </p>
-            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+            <Button 
+              size="lg" 
+              className="bg-accent hover:bg-accent/90 text-accent-foreground"
+              onClick={() => setIsCalendarOpen(true)}
+            >
               Get Started Today
             </Button>
           </div>
         </div>
       </div>
+      
+      <CalendarModal isOpen={isCalendarOpen} onClose={() => setIsCalendarOpen(false)} />
     </section>
   );
 };
