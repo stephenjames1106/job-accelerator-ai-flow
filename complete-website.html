@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptimaxAI - AI-Powered Business Solution</title>
+    <meta name="description" content="Transform your business with AI-powered automation that never misses a call, converts leads instantly, and boosts your revenue 24/7.">
+    
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* CSS Variables for Design System */
+        :root {
+            --background: 222.2 84% 4.9%;
+            --foreground: 210 40% 98%;
+            --card: 217.2 32.6% 17.5%;
+            --card-foreground: 210 40% 98%;
+            --primary: 217 91% 60%;
+            --primary-foreground: 210 40% 98%;
+            --primary-dark: 217 91% 45%;
+            --secondary: 217.2 32.6% 17.5%;
+            --secondary-foreground: 210 40% 98%;
+            --muted: 217.2 32.6% 17.5%;
+            --muted-foreground: 215 20.2% 65.1%;
+            --accent: 45 100% 51%;
+            --accent-foreground: 222.2 47.4% 11.2%;
+            --destructive: 0 62.8% 50.6%;
+            --destructive-foreground: 210 40% 98%;
+            --border: 217.2 32.6% 17.5%;
+            --success: 142 76% 36%;
+            --warning: 38 92% 50%;
+            --radius: 0.5rem;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            line-height: 1.6;
+        }
+        
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        .grid {
+            display: grid;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .text-left {
+            text-align: left;
+        }
+        
+        .text-white {
+            color: white;
+        }
+        
+        .bg-primary {
+            background-color: hsl(var(--primary));
+        }
+        
+        .bg-card {
+            background-color: hsl(var(--card));
+        }
+        
+        .bg-accent {
+            background-color: hsl(var(--accent));
+        }
+        
+        .text-primary {
+            color: hsl(var(--primary));
+        }
+        
+        .text-accent {
+            color: hsl(var(--accent));
+        }
+        
+        .text-muted {
+            color: hsl(var(--muted-foreground));
+        }
+        
+        .border {
+            border: 1px solid hsl(var(--border));
+        }
+        
+        .rounded {
+            border-radius: var(--radius);
+        }
+        
+        .p-4 {
+            padding: 1rem;
+        }
+        
+        .p-6 {
+            padding: 1.5rem;
+        }
+        
+        .p-8 {
+            padding: 2rem;
+        }
+        
+        .m-4 {
+            margin: 1rem;
+        }
+        
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+        
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+        
+        .mt-8 {
+            margin-top: 2rem;
+        }
+        
+        .py-12 {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+        
+        .py-16 {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+        
+        .py-20 {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+        
+        /* Typography */
+        .text-4xl {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+        }
+        
+        .text-5xl {
+            font-size: 3rem;
+            line-height: 1;
+        }
+        
+        .text-6xl {
+            font-size: 3.75rem;
+            line-height: 1;
+        }
+        
+        .text-xl {
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+        }
+        
+        .text-lg {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+        }
+        
+        .font-bold {
+            font-weight: 700;
+        }
+        
+        .font-semibold {
+            font-weight: 600;
+        }
+        
+        /* Component Styles */
+        .card {
+            background-color: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px hsl(217 91% 60% / 0.1);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background-color: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+        }
+        
+        .btn-primary:hover {
+            background-color: hsl(var(--primary-dark));
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: hsl(var(--foreground));
+            border: 1px solid hsl(var(--border));
+        }
+        
+        .btn-secondary:hover {
+            background-color: hsl(var(--muted));
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            background-color: hsl(var(--accent));
+            color: hsl(var(--accent-foreground));
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        /* Layout */
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+        
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        
+        .gap-4 {
+            gap: 1rem;
+        }
+        
+        .gap-6 {
+            gap: 1.5rem;
+        }
+        
+        .gap-8 {
+            gap: 2rem;
+        }
+        
+        .items-center {
+            align-items: center;
+        }
+        
+        .justify-center {
+            justify-content: center;
+        }
+        
+        .justify-between {
+            justify-content: space-between;
+        }
+        
+        .flex-col {
+            flex-direction: column;
+        }
+        
+        .space-y-4 > * + * {
+            margin-top: 1rem;
+        }
+        
+        .space-y-6 > * + * {
+            margin-top: 1.5rem;
+        }
+        
+        .space-y-8 > * + * {
+            margin-top: 2rem;
+        }
+        
+        /* Responsive */
+        @media (min-width: 768px) {
+            .md\\:grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            
+            .md\\:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+            
+            .md\\:flex-row {
+                flex-direction: row;
+            }
+            
+            .md\\:text-left {
+                text-align: left;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .lg\\:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        /* Custom Styles */
+        .hero-gradient {
+            background: linear-gradient(135deg, hsl(222.2 84% 4.9%), hsl(217.2 32.6% 17.5%));
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+        }
+        
+        .input:focus {
+            outline: none;
+            border-color: hsl(var(--primary));
+            box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-gradient py-20">
+        <div class="container">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-6 animate-fade-in">
+                    <div class="badge">
+                        ⚡ AI-Powered Business Automation
+                    </div>
+                    
+                    <h1 class="text-5xl font-bold">
+                        Never Miss Another
+                        <span class="text-accent">Customer</span>
+                        Again
+                    </h1>
+                    
+                    <p class="text-xl text-muted">
+                        Transform your business with AI that answers calls instantly, converts leads automatically, and books jobs 24/7 - even when you're sleeping.
+                    </p>
+                    
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <a href="#" class="btn btn-primary">Get Custom Quote</a>
+                        <a href="#" class="btn btn-secondary">Watch Demo</a>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <div class="text-2xl font-bold text-accent">24/7</div>
+                            <div class="text-muted">Availability</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-accent">3 sec</div>
+                            <div class="text-muted">Response Time</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-accent">80%</div>
+                            <div class="text-muted">Time Saved</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="font-semibold mb-4">Live Demo Interface</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3 p-3 bg-destructive rounded">
+                            <span>🔴</span>
+                            <span>Missed call detected: (555) 123-4567</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-primary rounded">
+                            <span>🤖</span>
+                            <span>AI responding in 3 seconds...</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-success rounded">
+                            <span>✅</span>
+                            <span>Job booked! $2,500 quote sent</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Critical Issues Section -->
+    <section class="py-16">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">
+                    The Hidden Costs of
+                    <span class="text-destructive">Missed Opportunities</span>
+                </h2>
+                <p class="text-xl text-muted">
+                    Every missed call is money walking out the door. Here's what's really happening:
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card text-center">
+                    <div class="text-4xl mb-4">📞</div>
+                    <h3 class="text-xl font-semibold mb-2">Missed Calls</h3>
+                    <div class="text-3xl font-bold text-destructive mb-2">67%</div>
+                    <p class="text-muted">of contractors miss calls during business hours due to being on job sites</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="text-4xl mb-4">⭐</div>
+                    <h3 class="text-xl font-semibold mb-2">Poor Reviews</h3>
+                    <div class="text-3xl font-bold text-destructive mb-2">43%</div>
+                    <p class="text-muted">of potential customers leave negative reviews when calls aren't returned within 2 hours</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="text-4xl mb-4">🌐</div>
+                    <h3 class="text-xl font-semibold mb-2">Website Visitors</h3>
+                    <div class="text-3xl font-bold text-destructive mb-2">89%</div>
+                    <p class="text-muted">of website visitors leave without contacting you because there's no immediate response</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-xl text-muted">
+                    <strong>The Result:</strong> You're losing $50,000+ annually to competitors who respond faster
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Game Changer Section -->
+    <section class="py-16 bg-card">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">
+                    What You Get With
+                    <span class="text-primary">OptimaxAI</span>
+                </h2>
+                <p class="text-xl text-muted">
+                    Advanced AI that works 24/7 to capture every opportunity
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card">
+                    <div class="text-3xl mb-4">🤖</div>
+                    <h3 class="text-xl font-semibold mb-2">AI Receptionist</h3>
+                    <p class="text-muted">Answers every call with a professional, human-like voice that understands your business and can book appointments instantly.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="text-3xl mb-4">💬</div>
+                    <h3 class="text-xl font-semibold mb-2">Smart Chat Integration</h3>
+                    <p class="text-muted">Connects with Facebook, Instagram, and your website to engage visitors instantly and convert them into paying customers.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="text-3xl mb-4">⭐</div>
+                    <h3 class="text-xl font-semibold mb-2">Google Review Automation</h3>
+                    <p class="text-muted">Automatically requests reviews from happy customers and manages your online reputation to attract more business.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="text-3xl mb-4">📅</div>
+                    <h3 class="text-xl font-semibold mb-2">Smart Scheduling</h3>
+                    <p class="text-muted">Books appointments directly into your calendar, sends confirmations, and manages rescheduling automatically.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="text-3xl mb-4">💰</div>
+                    <h3 class="text-xl font-semibold mb-2">Instant Estimates</h3>
+                    <p class="text-muted">Provides accurate quotes based on your pricing, location, and project details - closing deals while you sleep.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="text-3xl mb-4">📊</div>
+                    <h3 class="text-xl font-semibold mb-2">Lead Intelligence</h3>
+                    <p class="text-muted">Tracks every interaction, identifies high-value prospects, and provides insights to grow your business faster.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator Section -->
+    <section class="py-16" id="roi-calculator">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">
+                    Calculate Your
+                    <span class="text-accent">Lost Revenue</span>
+                </h2>
+                <p class="text-xl text-muted">
+                    See exactly how much money you're losing every week
+                </p>
+            </div>
+            
+            <div class="card max-w-2xl mx-auto">
+                <div class="space-y-6">
+                    <div>
+                        <label class="block font-semibold mb-2">How many calls do you get per week?</label>
+                        <input type="number" class="input" id="calls-per-week" placeholder="e.g., 20">
+                    </div>
+                    
+                    <div>
+                        <label class="block font-semibold mb-2">What's your average job value?</label>
+                        <input type="number" class="input" id="avg-job-value" placeholder="e.g., 2500">
+                    </div>
+                    
+                    <div>
+                        <label class="block font-semibold mb-2">What's your close rate? (%)</label>
+                        <input type="number" class="input" id="close-rate" placeholder="e.g., 30">
+                    </div>
+                    
+                    <button class="btn btn-primary w-full" onclick="calculateROI()">
+                        Calculate Lost Revenue
+                    </button>
+                    
+                    <div id="results" class="hidden space-y-4">
+                        <div class="text-center">
+                            <h3 class="text-xl font-semibold mb-4">Your Potential Lost Revenue:</h3>
+                            <div class="grid grid-cols-3 gap-4 text-center">
+                                <div class="card">
+                                    <div class="text-2xl font-bold text-destructive" id="weekly-loss">$0</div>
+                                    <div class="text-muted">Weekly</div>
+                                </div>
+                                <div class="card">
+                                    <div class="text-2xl font-bold text-destructive" id="monthly-loss">$0</div>
+                                    <div class="text-muted">Monthly</div>
+                                </div>
+                                <div class="card">
+                                    <div class="text-2xl font-bold text-destructive" id="yearly-loss">$0</div>
+                                    <div class="text-muted">Yearly</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-6">
+                            <p class="text-muted mb-4">
+                                OptimaxAI can recover 80% of this lost revenue for you
+                            </p>
+                            <a href="#" class="btn btn-primary">Get Your Custom Solution</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Demo Section -->
+    <section class="py-16 bg-card">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">
+                    Watch It Work:
+                    <span class="text-primary">Live Demo</span>
+                </h2>
+                <p class="text-xl text-muted">
+                    See how OptimaxAI converts a missed call into a booked job in real-time
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-8">
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-destructive rounded-full flex items-center justify-center text-white font-bold">1</div>
+                        <div class="card flex-1">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">📞</span>
+                                <div>
+                                    <h3 class="font-semibold">Missed Call Detected</h3>
+                                    <p class="text-muted">Customer calls at 2:30 PM - you're on a job site</p>
+                                </div>
+                                <span class="text-muted">2:30 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold">2</div>
+                        <div class="card flex-1">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">🤖</span>
+                                <div>
+                                    <h3 class="font-semibold">AI Responds Instantly</h3>
+                                    <p class="text-muted">OptimaxAI calls back within 3 seconds with a professional greeting</p>
+                                </div>
+                                <span class="text-muted">2:30 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-success rounded-full flex items-center justify-center text-white font-bold">3</div>
+                        <div class="card flex-1">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">✅</span>
+                                <div>
+                                    <h3 class="font-semibold">Job Booked Successfully</h3>
+                                    <p class="text-muted">Quote provided, appointment scheduled, and customer details captured</p>
+                                </div>
+                                <span class="text-muted">2:33 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <div class="card max-w-md mx-auto">
+                        <div class="text-4xl mb-4">🎥</div>
+                        <h3 class="font-semibold mb-2">Watch Full Demo</h3>
+                        <p class="text-muted mb-4">See the entire process in action</p>
+                        <a href="#" class="btn btn-primary">Play Demo Video</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-16">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">
+                    How OptimaxAI
+                    <span class="text-accent">Transforms</span>
+                    Your Business
+                </h2>
+                <p class="text-xl text-muted">
+                    Three simple steps to never miss another opportunity
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card text-center">
+                    <div class="text-6xl mb-4">⚙️</div>
+                    <h3 class="text-xl font-semibold mb-4">Setup & Training</h3>
+                    <p class="text-muted">
+                        We configure OptimaxAI with your business details, pricing, and preferences. Our AI learns your industry terminology and best practices in 24 hours.
+                    </p>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="text-6xl mb-4">🚀</div>
+                    <h3 class="text-xl font-semibold mb-4">Go Live</h3>
+                    <p class="text-muted">
+                        Your AI assistant starts working immediately - answering calls, responding to messages, and booking appointments while you focus on delivering great work.
+                    </p>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="text-6xl mb-4">📈</div>
+                    <h3 class="text-xl font-semibold mb-4">Watch Revenue Grow</h3>
+                    <p class="text-muted">
+                        Track your increased bookings, improved response times, and growing revenue through our comprehensive dashboard and weekly reports.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="btn btn-primary">Start Your Transformation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Modern Businesses Section -->
+    <section class="py-16 bg-card">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">
+                    Why Modern Businesses Choose
+                    <span class="text-primary">OptimaxAI</span>
+                </h2>
+                <p class="text-xl text-muted">
+                    See the difference between old-school contractors and smart businesses
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-4 text-center">
+                        <span class="text-destructive">Old Way</span> - Traditional Contractors
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3">
+                            <span class="text-destructive">❌</span>
+                            <span>Miss 67% of incoming calls</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-destructive">❌</span>
+                            <span>Take hours or days to respond</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-destructive">❌</span>
+                            <span>Lose customers to competitors</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-destructive">❌</span>
+                            <span>Rely on manual follow-ups</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-destructive">❌</span>
+                            <span>Limited to business hours only</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-4 text-center">
+                        <span class="text-success">New Way</span> - Smart Contractors
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Capture 100% of opportunities</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Respond in 3 seconds, 24/7</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Book jobs while sleeping</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Automated follow-up sequences</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Never closed, always available</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-8 mt-12 text-center">
+                <div>
+                    <div class="text-3xl font-bold text-primary">95%</div>
+                    <p class="text-muted">Customer satisfaction increase</p>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-primary">3x</div>
+                    <p class="text-muted">More leads converted</p>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-primary">24/7</div>
+                    <p class="text-muted">Business availability</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-16">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">
+                    Investment Options for
+                    <span class="text-accent">Every Business</span>
+                </h2>
+                <p class="text-xl text-muted">
+                    Choose the perfect plan to transform your business
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-2">Starter</h3>
+                    <p class="text-muted mb-4">Perfect for small contractors</p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>AI phone answering</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Basic appointment booking</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Email follow-ups</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>24/7 availability</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary w-full">Get Custom Quote</a>
+                </div>
+                
+                <div class="card border-primary relative">
+                    <div class="badge absolute -top-3 left-1/2 transform -translate-x-1/2">Most Popular</div>
+                    <h3 class="text-xl font-semibold mb-2">Pro</h3>
+                    <p class="text-muted mb-4">Best for growing businesses</p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Everything in Starter</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Social media integration</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Advanced scheduling</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Review automation</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Lead scoring</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary w-full">Get Custom Quote</a>
+                </div>
+                
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-2">Full Automation</h3>
+                    <p class="text-muted mb-4">Complete business automation</p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Everything in Pro</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Custom AI training</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Multi-location support</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Advanced analytics</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-success">✅</span>
+                            <span>Priority support</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary w-full">Get Custom Quote</a>
+                </div>
+            </div>
+            
+            <div class="card mt-12 text-center">
+                <h3 class="text-xl font-semibold mb-4">30-Day Performance Guarantee</h3>
+                <p class="text-muted mb-6">
+                    If OptimaxAI doesn't increase your booked appointments by at least 40% in the first 30 days, we'll refund every penny and help you transition back to your old system at no cost.
+                </p>
+                <a href="#" class="btn btn-accent">Book Your Strategy Call Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <footer class="py-16 bg-card text-center">
+        <div class="container">
+            <h2 class="text-4xl font-bold mb-4">
+                Ready to Stop Losing Money to
+                <span class="text-destructive">Missed Calls?</span>
+            </h2>
+            <p class="text-xl text-muted mb-8">
+                Join the smart contractors who never miss an opportunity
+            </p>
+            <a href="#" class="btn btn-primary btn-lg">Get Your Custom Quote Today</a>
+        </div>
+    </footer>
+
+    <script>
+        function calculateROI() {
+            const callsPerWeek = parseFloat(document.getElementById('calls-per-week').value) || 0;
+            const avgJobValue = parseFloat(document.getElementById('avg-job-value').value) || 0;
+            const closeRate = parseFloat(document.getElementById('close-rate').value) || 0;
+            
+            if (callsPerWeek && avgJobValue && closeRate) {
+                // Assuming 67% of calls are missed (industry average)
+                const missedCallsPerWeek = callsPerWeek * 0.67;
+                const missedOpportunityValue = missedCallsPerWeek * (closeRate / 100) * avgJobValue;
+                
+                const weeklyLoss = missedOpportunityValue;
+                const monthlyLoss = weeklyLoss * 4.33; // Average weeks per month
+                const yearlyLoss = weeklyLoss * 52;
+                
+                document.getElementById('weekly-loss').textContent = '$' + weeklyLoss.toLocaleString(undefined, {maximumFractionDigits: 0});
+                document.getElementById('monthly-loss').textContent = '$' + monthlyLoss.toLocaleString(undefined, {maximumFractionDigits: 0});
+                document.getElementById('yearly-loss').textContent = '$' + yearlyLoss.toLocaleString(undefined, {maximumFractionDigits: 0});
+                
+                document.getElementById('results').classList.remove('hidden');
+            }
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all cards and sections
+        document.querySelectorAll('.card, section').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
