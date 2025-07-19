@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptimaxAI - AI-Powered Business Automation for Contractors</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            padding: 60px;
+            display: none;
+            background: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .slide h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #4f46e5;
+        }
+
+        .slide h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .slide p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .primary-text {
+            color: #4f46e5;
+            font-weight: 600;
+        }
+
+        .large-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #ef4444;
+            margin: 0.5rem 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .problem-card {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .solution-card {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .stat-item {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #4f46e5;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+
+        .demo-step {
+            background: #f1f5f9;
+            border-left: 4px solid #4f46e5;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+        }
+
+        .demo-step.alert {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .demo-step.warning {
+            border-color: #f59e0b;
+            background: #fffbeb;
+        }
+
+        .demo-step.success {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 2rem;
+        }
+
+        .old-way {
+            background: #fef2f2;
+            border: 2px solid #ef4444;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .new-way {
+            background: #f0fdf4;
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            text-align: left;
+            margin-top: 1rem;
+        }
+
+        .feature-list li {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #3730a3;
+            transform: translateY(-2px);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 2rem;
+        }
+
+        .package-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .package-card.popular {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f59e0b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .guarantee-box {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 2rem;
+            max-width: 800px;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 2rem;
+            max-width: 800px;
+        }
+
+        .cta-button {
+            background: white;
+            color: #4f46e5;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+            }
+            .slide h1 {
+                font-size: 2.5rem;
+            }
+            .slide h2 {
+                font-size: 2rem;
+            }
+            .grid-2, .grid-3, .comparison-container, .package-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">12</span>
+        </div>
+
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>Turn Missed Calls Into <span class="primary-text">Booked Jobs</span></h1>
+            <h1 style="font-size: 2rem; margin-top: 1rem;">— Automatically</h1>
+            <p style="font-size: 1.5rem; margin: 2rem 0; color: #4f46e5; font-weight: 600;">AI-Powered Automation for Smart Contractors</p>
+            <div class="grid-3" style="margin-top: 3rem;">
+                <div class="stat-item">
+                    <span class="icon">🏆</span>
+                    <div class="stat-label">500+ contractors trust us</div>
+                </div>
+                <div class="stat-item">
+                    <span class="icon">⭐</span>
+                    <div class="stat-label">4.9/5 rating</div>
+                </div>
+                <div class="stat-item">
+                    <span class="icon">🚀</span>
+                    <div class="stat-label">OptimaxAI</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Critical Problems -->
+        <div class="slide">
+            <h2>The Critical Problems You're Facing Right Now</h2>
+            <p style="font-size: 1.5rem; color: #ef4444; font-weight: 600; margin-bottom: 3rem;">Every Minute of Delay Costs You Potential Customers</p>
+            <div class="grid-3">
+                <div class="problem-card">
+                    <span class="icon">📞</span>
+                    <div class="large-number">78%</div>
+                    <h3>Choose First Responder</h3>
+                    <p>Missed calls = Missed deals. If you don't answer, they move on to your competitor.</p>
+                </div>
+                <div class="problem-card">
+                    <span class="icon">⭐</span>
+                    <div class="large-number">92%</div>
+                    <h3>Don't Leave Reviews</h3>
+                    <p>Happy customers don't leave reviews unless you ask. No follow-up = missed social proof.</p>
+                </div>
+                <div class="problem-card">
+                    <span class="icon">🌐</span>
+                    <div class="large-number">97%</div>
+                    <h3>Leave Without Buying</h3>
+                    <p>Website visitors leave because there's no one to talk to. You need instant engagement.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: AI Game Changer -->
+        <div class="slide">
+            <h2>The AI Game Changer</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 3rem;">What AI Can Do For Your Business</p>
+            <div class="grid-2">
+                <div class="solution-card">
+                    <span class="icon">🤖</span>
+                    <h3>AI Receptionist</h3>
+                    <p>Never miss another call. AI responds instantly to missed calls with personalized text messages.</p>
+                </div>
+                <div class="solution-card">
+                    <span class="icon">💬</span>
+                    <h3>Website Chatbot</h3>
+                    <p>Convert visitors 24/7. AI chatbot qualifies leads and books appointments while you sleep.</p>
+                </div>
+                <div class="solution-card">
+                    <span class="icon">⭐</span>
+                    <h3>Review Automation</h3>
+                    <p>Generate 5-star reviews automatically. AI follows up with customers and drives reviews.</p>
+                </div>
+                <div class="solution-card">
+                    <span class="icon">📊</span>
+                    <h3>AI Estimator</h3>
+                    <p>Instant quote generation. AI provides preliminary estimates to speed up your sales process.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Live Demo -->
+        <div class="slide">
+            <h2>Live Demo - How It Works</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 2rem;">Real-Time Missed Call Recovery</p>
+            <div style="max-width: 600px;">
+                <div class="demo-step alert">
+                    <strong>📞 Missed call detected</strong><br>
+                    from (555) 123-4567
+                </div>
+                <div class="demo-step warning">
+                    <strong>🤖 AI analyzing...</strong><br>
+                    Generating personalized response
+                </div>
+                <div class="demo-step success">
+                    <strong>✅ Auto-Response Sent</strong><br>
+                    Response time: 3 seconds
+                </div>
+                <div class="demo-step" style="background: #e0f2fe; border-color: #0284c7;">
+                    <strong>💬 AI Message:</strong><br>
+                    "Hi! Thanks for calling ABC Roofing. I'm currently with another customer but would love to help you. What type of roofing project are you considering?"
+                </div>
+                <div class="demo-step success">
+                    <strong>🎯 Mission Complete</strong><br>
+                    Missed call converted to qualified lead
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Performance Stats -->
+        <div class="slide">
+            <h2>The Numbers That Matter</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 3rem;">Performance Statistics</p>
+            <div class="grid-3">
+                <div class="stat-item">
+                    <span class="stat-number">3s</span>
+                    <div class="stat-label">Average Response Time</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <div class="stat-label">AI Availability</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">90%</span>
+                    <div class="stat-label">Time Saved</div>
+                </div>
+            </div>
+            <div style="margin-top: 3rem; background: #fee2e2; padding: 2rem; border-radius: 12px; border: 2px solid #ef4444;">
+                <h3 style="color: #ef4444; font-size: 1.5rem;">Remember: 78% choose the first responder</h3>
+                <p>Speed is everything in the contracting business.</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: How It Works Process -->
+        <div class="slide">
+            <h2>How It Works</h2>
+            <p style="font-size: 1.5rem; color: #4f46e5; font-weight: 600; margin-bottom: 3rem;">Simple. Fast. Profitable.</p>
+            <div class="grid-3">
+                <div class="card">
+                    <span class="icon">⚙️</span>
+                    <div style="width: 40px; height: 40px; background: #4f46e5; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin: 0 auto 1rem;">1</div>
+                    <h3>Same-Day Setup</h3>
+                    <p>We handle everything - phone integration, AI training, calendar sync.</p>
+                    <div style="color: #10b981; font-weight: 600; margin-top: 1rem;">✓ No tech skills needed</div>
+                </div>
+                <div class="card">
+                    <span class="icon">⚡</span>
+                    <div style="width: 40px; height: 40px; background: #4f46e5; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin: 0 auto 1rem;">2</div>
+                    <h3>AI Takes Over</h3>
+                    <p>Every missed call triggers instant AI response. Text messaging, qualification, scheduling.</p>
+                    <div style="color: #10b981; font-weight: 600; margin-top: 1rem;">✓ Works while you sleep</div>
+                </div>
+                <div class="card">
+                    <span class="icon">📈</span>
+                    <div style="width: 40px; height: 40px; background: #4f46e5; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin: 0 auto 1rem;">3</div>
+                    <h3>Watch Jobs Roll In</h3>
+                    <p>Pre-qualified appointments appear in your calendar. Reviews get generated automatically.</p>
+                    <div style="color: #10b981; font-weight: 600; margin-top: 1rem;">✓ More jobs, less work</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Modern vs Traditional -->
+        <div class="slide">
+            <h2>Why Modern Businesses Win</h2>
+            <div class="comparison-container">
+                <div class="old-way">
+                    <h3 style="color: #ef4444; margin-bottom: 1.5rem;">❌ Old Way (Traditional)</h3>
+                    <ul class="feature-list">
+                        <li>❌ Miss calls during jobs</li>
+                        <li>❌ Forget to ask for reviews</li>
+                        <li>❌ Website just sits there</li>
+                        <li>❌ Manual follow-up</li>
+                        <li>❌ Work nights and weekends</li>
+                        <li>❌ Lose leads to faster competitors</li>
+                    </ul>
+                </div>
+                <div class="new-way">
+                    <h3 style="color: #10b981; margin-bottom: 1.5rem;">✅ New Way (Smart Contractors)</h3>
+                    <ul class="feature-list">
+                        <li>✅ AI responds instantly</li>
+                        <li>✅ Automatic review requests</li>
+                        <li>✅ Website converts visitors</li>
+                        <li>✅ Automated systems work 24/7</li>
+                        <li>✅ Focus on high-value work</li>
+                        <li>✅ Always first to respond</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: ROI Calculator -->
+        <div class="slide">
+            <h2>Your Potential Monthly Return</h2>
+            <div style="max-width: 800px; background: #f8fafc; padding: 2rem; border-radius: 12px; border: 2px solid #e2e8f0;">
+                <div class="grid-2" style="gap: 2rem;">
+                    <div>
+                        <h3>Current Situation</h3>
+                        <div class="stat-item">
+                            <span class="stat-number" style="color: #ef4444;">20</span>
+                            <div class="stat-label">Missed calls per month</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" style="color: #ef4444;">$5,000</span>
+                            <div class="stat-label">Average job value</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>With OptimaxAI</h3>
+                        <div class="stat-item">
+                            <span class="stat-number" style="color: #10b981;">15</span>
+                            <div class="stat-label">Recovered calls (75% success rate)</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" style="color: #10b981;">$75,000</span>
+                            <div class="stat-label">Additional monthly revenue</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem; padding: 1rem; background: #dcfce7; border-radius: 8px;">
+                    <h3 style="color: #10b981;">ROI: 1,500% in first month</h3>
+                    <p>Most contractors see ROI within 30 days</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Service Packages -->
+        <div class="slide">
+            <h2>Done-For-You AI Systems</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Built For Busy Contractors</p>
+            <div class="package-grid">
+                <div class="package-card">
+                    <span class="icon">⚡</span>
+                    <h3>Starter</h3>
+                    <div style="font-size: 1.8rem; font-weight: 700; color: #4f46e5; margin: 1rem 0;">Custom Pricing</div>
+                    <ul class="feature-list" style="text-align: left;">
+                        <li>✅ AI missed call text-back</li>
+                        <li>✅ 24/7 lead qualification</li>
+                        <li>✅ Calendar integration</li>
+                        <li>✅ Basic review automation</li>
+                        <li>✅ Same-day setup</li>
+                    </ul>
+                </div>
+                <div class="package-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <span class="icon">⭐</span>
+                    <h3>Pro</h3>
+                    <div style="font-size: 1.8rem; font-weight: 700; color: #f59e0b; margin: 1rem 0;">Custom Pricing</div>
+                    <ul class="feature-list" style="text-align: left;">
+                        <li>✅ Everything in Starter +</li>
+                        <li>✅ AI voice agent for calls</li>
+                        <li>✅ Website chatbot integration</li>
+                        <li>✅ Advanced review generation</li>
+                        <li>✅ ROI tracking dashboard</li>
+                    </ul>
+                </div>
+                <div class="package-card">
+                    <span class="icon">🏆</span>
+                    <h3>Full Automation</h3>
+                    <div style="font-size: 1.8rem; font-weight: 700; color: #10b981; margin: 1rem 0;">Custom Pricing</div>
+                    <ul class="feature-list" style="text-align: left;">
+                        <li>✅ Everything in Pro +</li>
+                        <li>✅ High-conversion website</li>
+                        <li>✅ Google Business optimization</li>
+                        <li>✅ Review raffle system</li>
+                        <li>✅ White-glove setup</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Guarantee -->
+        <div class="slide">
+            <h2>Risk-Free Investment</h2>
+            <div class="guarantee-box">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">30-Day Performance Guarantee</h3>
+                <p style="font-size: 1.2rem; margin-bottom: 1.5rem;">
+                    If you don't get at least 3 additional booked calls or multiple 5-star reviews 
+                    in the first 30 days, we'll refund you completely.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem;">
+                    <div>✅ Risk-free trial</div>
+                    <div>✅ No setup fees</div>
+                    <div>✅ No learning curve</div>
+                    <div>✅ No tech headaches</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Social Proof -->
+        <div class="slide">
+            <h2>What Other Contractors Are Saying</h2>
+            <div class="grid-2" style="margin-top: 2rem;">
+                <div class="card">
+                    <div style="color: #f59e0b; font-size: 1.5rem; margin-bottom: 1rem;">⭐⭐⭐⭐⭐</div>
+                    <p style="font-style: italic; margin-bottom: 1rem;">"Went from missing 15 calls a week to booking 12 additional jobs per month. This AI system paid for itself in 2 weeks."</p>
+                    <div style="font-weight: 600;">- Mike R., Roofing Contractor</div>
+                </div>
+                <div class="card">
+                    <div style="color: #f59e0b; font-size: 1.5rem; margin-bottom: 1rem;">⭐⭐⭐⭐⭐</div>
+                    <p style="font-style: italic; margin-bottom: 1rem;">"The review automation alone has gotten us 47 new 5-star reviews in 3 months. Game changer for our reputation."</p>
+                    <div style="font-weight: 600;">- Sarah T., HVAC Company</div>
+                </div>
+            </div>
+            <div style="margin-top: 3rem; text-align: center;">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <div class="stat-label">Contractors Trust Us</div>
+                </div>
+                <div class="stat-item" style="margin-top: 1rem;">
+                    <span style="color: #f59e0b; font-size: 2rem;">⭐⭐⭐⭐⭐</span>
+                    <div class="stat-label">4.9/5 Average Rating</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Next Steps -->
+        <div class="slide">
+            <h2>Ready to Stop Losing Jobs to Faster Competitors?</h2>
+            <p style="font-size: 1.3rem; font-weight: 600; margin: 2rem 0; max-width: 800px;">
+                "The companies winning right now aren't the cheapest — they're the fastest, 
+                the smartest, and the most up-to-date."
+            </p>
+            <div class="cta-section">
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Next Steps:</h3>
+                <ul style="list-style: none; font-size: 1.2rem; margin-bottom: 2rem;">
+                    <li>📅 Schedule implementation call</li>
+                    <li>💰 Get custom pricing based on your call volume</li>
+                    <li>🚀 Same-day setup available</li>
+                    <li>🎯 Start converting missed calls today</li>
+                </ul>
+                <button class="cta-button">Book Your Strategy Session Today</button>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">
+                    📞 Or call us directly: (555) 123-4567<br>
+                    🌐 Visit: optimaxai.com
+                </p>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+            <button class="nav-btn" onclick="nextSlide()">Next →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = n;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Touch navigation for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) {
+                nextSlide();
+            } else if (touchEndX - touchStartX > 50) {
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>
