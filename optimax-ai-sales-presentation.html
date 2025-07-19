@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptimaxAI Sales Presentation</title>
+    <style>
+        :root {
+            /* Design System - Matching Website */
+            --background: 222.2 84% 4.9%;
+            --foreground: 210 40% 98%;
+            --card: 222.2 84% 4.9%;
+            --card-foreground: 210 40% 98%;
+            --popover: 222.2 84% 4.9%;
+            --popover-foreground: 210 40% 98%;
+            --primary: 217.2 91.2% 59.8%;
+            --primary-foreground: 222.2 84% 4.9%;
+            --secondary: 217.2 32.6% 17.5%;
+            --secondary-foreground: 210 40% 98%;
+            --muted: 217.2 32.6% 17.5%;
+            --muted-foreground: 215 20.2% 65.1%;
+            --accent: 142.1 76.2% 36.3%;
+            --accent-foreground: 210 40% 98%;
+            --destructive: 0 62.8% 30.6%;
+            --destructive-foreground: 210 40% 98%;
+            --border: 217.2 32.6% 17.5%;
+            --input: 217.2 32.6% 17.5%;
+            --ring: 217.2 91.2% 59.8%;
+            --success: 142.1 76.2% 36.3%;
+            --success-foreground: 210 40% 98%;
+            --warning: 38 92% 50%;
+            --warning-foreground: 222.2 84% 4.9%;
+            
+            --gradient-hero: linear-gradient(135deg, hsl(217.2 91.2% 59.8%) 0%, hsl(142.1 76.2% 36.3%) 100%);
+            --gradient-accent: linear-gradient(135deg, hsl(142.1 76.2% 36.3%) 0%, hsl(217.2 91.2% 59.8%) 100%);
+            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.3);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: hsl(var(--background));
+            color: hsl(var(--foreground));
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100vh;
+            padding: 80px 60px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background: hsl(var(--background));
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: hsl(var(--foreground));
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: hsl(var(--muted-foreground));
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-card);
+            transition: var(--transition-smooth);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: hsl(var(--primary));
+            margin-bottom: 1rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: hsl(var(--muted-foreground));
+            margin-bottom: 1rem;
+        }
+
+        .stat-description {
+            font-size: 0.95rem;
+            color: hsl(var(--muted-foreground));
+            line-height: 1.5;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 4rem 0;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            z-index: 0;
+        }
+
+        .timeline-step {
+            background: hsl(var(--card));
+            border: 2px solid hsl(var(--primary));
+            border-radius: 16px;
+            padding: 2rem;
+            width: 300px;
+            position: relative;
+            z-index: 1;
+            box-shadow: var(--shadow-card);
+        }
+
+        .timeline-number {
+            background: var(--gradient-hero);
+            color: hsl(var(--background));
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 1rem auto;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: hsl(var(--foreground));
+        }
+
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .pain-points {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .pain-point {
+            background: linear-gradient(135deg, hsl(var(--destructive) / 0.1), hsl(var(--destructive) / 0.05));
+            border: 1px solid hsl(var(--destructive) / 0.3);
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: left;
+        }
+
+        .pain-point h4 {
+            color: hsl(var(--destructive));
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .pain-point p {
+            color: hsl(var(--muted-foreground));
+            font-size: 1.1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: left;
+            transition: var(--transition-smooth);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon.blue {
+            background: hsl(var(--primary) / 0.2);
+            color: hsl(var(--primary));
+        }
+
+        .feature-icon.green {
+            background: hsl(var(--success) / 0.2);
+            color: hsl(var(--success));
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: hsl(var(--foreground));
+        }
+
+        .feature-desc {
+            color: hsl(var(--muted-foreground));
+            line-height: 1.6;
+        }
+
+        .roi-calculator {
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: 20px;
+            padding: 4rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-card);
+        }
+
+        .roi-formula {
+            font-size: 2rem;
+            font-weight: 600;
+            color: hsl(var(--primary));
+            margin-bottom: 2rem;
+        }
+
+        .roi-example {
+            background: hsl(var(--muted) / 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .comparison-card {
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: left;
+        }
+
+        .old-way {
+            background: linear-gradient(135deg, hsl(var(--destructive) / 0.1), hsl(var(--destructive) / 0.05));
+            border: 1px solid hsl(var(--destructive) / 0.3);
+        }
+
+        .new-way {
+            background: linear-gradient(135deg, hsl(var(--success) / 0.1), hsl(var(--success) / 0.05));
+            border: 1px solid hsl(var(--success) / 0.3);
+        }
+
+        .comparison-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .old-way .comparison-title {
+            color: hsl(var(--destructive));
+        }
+
+        .new-way .comparison-title {
+            color: hsl(var(--success));
+        }
+
+        .comparison-list {
+            list-style: none;
+        }
+
+        .comparison-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .comparison-list li::before {
+            content: '✗';
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .old-way .comparison-list li::before {
+            color: hsl(var(--destructive));
+        }
+
+        .new-way .comparison-list li::before {
+            content: '✓';
+            color: hsl(var(--success));
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .pricing-card {
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: left;
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid hsl(var(--primary));
+            background: linear-gradient(135deg, hsl(var(--primary) / 0.05), hsl(var(--card)));
+        }
+
+        .pricing-badge {
+            background: var(--gradient-hero);
+            color: hsl(var(--background));
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .pricing-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: hsl(var(--foreground));
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: hsl(var(--primary));
+            margin-bottom: 1rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: hsl(var(--success));
+            font-weight: bold;
+            margin-right: 0.8rem;
+        }
+
+        .cta-button {
+            background: var(--gradient-hero);
+            color: hsl(var(--background));
+            border: none;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            margin-top: 2rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: hsl(var(--muted-foreground));
+            font-weight: 600;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .nav-button {
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            color: hsl(var(--foreground));
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-button:hover {
+            background: hsl(var(--primary));
+            color: hsl(var(--background));
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            color: hsl(var(--foreground));
+        }
+
+        /* Message Bubble Styles */
+        .message-demo {
+            background: hsl(var(--card));
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .message {
+            background: hsl(var(--primary));
+            color: hsl(var(--background));
+            padding: 1rem 1.5rem;
+            border-radius: 18px;
+            margin-bottom: 1rem;
+            max-width: 300px;
+            margin-left: auto;
+        }
+
+        .response {
+            background: hsl(var(--muted));
+            color: hsl(var(--foreground));
+            padding: 1rem 1.5rem;
+            border-radius: 18px;
+            margin-bottom: 1rem;
+            max-width: 300px;
+        }
+
+        .timestamp {
+            font-size: 0.8rem;
+            color: hsl(var(--muted-foreground));
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 30px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .stat-grid,
+            .feature-grid,
+            .comparison,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .timeline {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .timeline::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Attention-Grabbing Intro -->
+        <div class="slide active">
+            <div class="slide-content">
+                <h1>Turn Missed Calls Into Booked Jobs — Automatically</h1>
+                <h3>AI system that captures leads 24/7, while you focus on your business</h3>
+                
+                <div class="message-demo">
+                    <div class="timestamp">Missed Call - 2:47 PM</div>
+                    <div class="response">
+                        <strong>AI Response:</strong> Hi! I see you just called about our roofing services. I'm our AI assistant and I'm here to help 24/7. What type of roofing work do you need done?
+                    </div>
+                    <div class="message">Great! I need a roof inspection for potential damage.</div>
+                    <div class="response">
+                        <strong>AI:</strong> Perfect! I can get you scheduled for a free inspection. What's your address and preferred time?
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem; color: hsl(var(--success)); font-weight: 600;">
+                        ✓ Lead Captured • ✓ Job Booked • ✓ Customer Happy
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Pain Point Breakdown -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Why Businesses Are Losing Money Every Week</h2>
+                
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📞</div>
+                        <div class="stat-number">78%</div>
+                        <div class="stat-label">Choose First Responder</div>
+                        <div class="stat-description">
+                            When customers call multiple contractors, they book with whoever responds first. Miss the call = miss the job.
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-number">92%</div>
+                        <div class="stat-label">Never Leave Reviews</div>
+                        <div class="stat-description">
+                            Happy customers won't leave reviews unless you ask. No reviews = fewer new customers finding you online.
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">🌐</div>
+                        <div class="stat-number">97%</div>
+                        <div class="stat-label">Leave Without Converting</div>
+                        <div class="stat-description">
+                            Website visitors bounce without engaging. No instant response = lost leads to competitors.
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 style="color: hsl(var(--destructive)); margin-top: 3rem;">
+                    Every missed opportunity is money in your competitor's pocket.
+                </h3>
+            </div>
+        </div>
+
+        <!-- Slide 3: Real-Time Example -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Watch a Missed Call Turn Into a Booked Job</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-step">
+                        <div class="timeline-number">1</div>
+                        <div class="timeline-title">Missed Call</div>
+                        <div class="timeline-desc">Customer calls at 8 PM when you're with family</div>
+                        <div class="timestamp">8:03 PM</div>
+                    </div>
+                    
+                    <div class="timeline-step">
+                        <div class="timeline-number">2</div>
+                        <div class="timeline-title">Instant AI Response</div>
+                        <div class="timeline-desc">AI texts back in under 30 seconds, keeps conversation going</div>
+                        <div class="timestamp">8:03 PM</div>
+                    </div>
+                    
+                    <div class="timeline-step">
+                        <div class="timeline-number">3</div>
+                        <div class="timeline-title">Job Booked</div>
+                        <div class="timeline-desc">Customer schedules appointment, gets confirmation</div>
+                        <div class="timestamp">8:07 PM</div>
+                    </div>
+                </div>
+                
+                <div class="roi-example">
+                    <h3 style="color: hsl(var(--success)); margin-bottom: 1rem;">Real Result:</h3>
+                    <p style="font-size: 1.2rem; color: hsl(var(--foreground));">
+                        $2,400 HVAC job booked automatically while contractor was at dinner with family.
+                        <br><strong>Zero effort required.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Common Revenue Leaks -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Are These Costing You Customers?</h2>
+                
+                <div class="pain-points">
+                    <div class="pain-point">
+                        <h4>How many calls do you miss every week?</h4>
+                        <p>You're on a job site, in a meeting, or just trying to have dinner. Every missed call could be a $1,000+ job walking away.</p>
+                    </div>
+                    
+                    <div class="pain-point">
+                        <h4>Are customers bouncing off your website?</h4>
+                        <p>They visit your site at 11 PM, need answers now, but have to wait until tomorrow. Guess who they call instead?</p>
+                    </div>
+                    
+                    <div class="pain-point">
+                        <h4>Are you following up on every lead?</h4>
+                        <p>One follow-up text isn't enough. Most leads need 5-7 touchpoints before booking. Are you doing that consistently?</p>
+                    </div>
+                    
+                    <div class="pain-point">
+                        <h4>Are happy customers leaving you reviews?</h4>
+                        <p>You did great work, they're thrilled, but no review. Without 5-star reviews, new customers won't find or trust you.</p>
+                    </div>
+                </div>
+                
+                <h3 style="color: hsl(var(--warning)); margin-top: 2rem;">
+                    If you answered "no" to any of these, you're losing money every single day.
+                </h3>
+            </div>
+        </div>
+
+        <!-- Slide 5: What You Get -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Smart Automation That Works While You Don't</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon blue">🤖</div>
+                        <div class="feature-title">AI Receptionist & Text-Back</div>
+                        <div class="feature-desc">
+                            Instantly responds to missed calls with intelligent text messages. Qualifies leads, books appointments, and handles FAQ's 24/7.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon green">💬</div>
+                        <div class="feature-title">Website & Social Media Chatbot</div>
+                        <div class="feature-desc">
+                            Engages website visitors and social media followers instantly. Captures leads that would otherwise leave without contacting you.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon blue">⭐</div>
+                        <div class="feature-title">Google Review Automation</div>
+                        <div class="feature-desc">
+                            Automatically asks happy customers for reviews with perfectly timed follow-ups. More 5-star reviews = more customers.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon green">📋</div>
+                        <div class="feature-title">AI Estimator (Optional)</div>
+                        <div class="feature-desc">
+                            Provides instant ballpark estimates for common jobs. Qualifies leads before they reach you, saving time and increasing close rates.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cta-button" style="margin: 2rem auto; display: block; width: fit-content;">
+                    All working together to turn leads into customers automatically
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: ROI Calculator -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Stop Leaving Money On The Table</h2>
+                
+                <div class="roi-calculator">
+                    <div class="roi-formula">
+                        Missed Calls × Average Job Value × Close Rate = Money Lost
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 2rem 0;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 700; color: hsl(var(--primary));">5</div>
+                            <div style="color: hsl(var(--muted-foreground));">Missed calls/week</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 700; color: hsl(var(--primary));">$1,500</div>
+                            <div style="color: hsl(var(--muted-foreground));">Average job value</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 700; color: hsl(var(--primary));">30%</div>
+                            <div style="color: hsl(var(--muted-foreground));">Close rate</div>
+                        </div>
+                    </div>
+                    
+                    <div class="roi-example">
+                        <h3 style="color: hsl(var(--destructive)); text-align: center; margin-bottom: 1rem;">
+                            You're Losing $2,250 Every Week
+                        </h3>
+                        <div style="text-align: center; font-size: 1.1rem;">
+                            <div>Weekly: <strong style="color: hsl(var(--destructive));">$2,250</strong></div>
+                            <div>Monthly: <strong style="color: hsl(var(--destructive));">$9,750</strong></div>
+                            <div>Yearly: <strong style="color: hsl(var(--destructive));">$117,000</strong></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 style="color: hsl(var(--warning));">
+                    How much are YOU losing? Do the math with your numbers.
+                </h3>
+            </div>
+        </div>
+
+        <!-- Slide 7: Simple Setup -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>How It Works</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-step">
+                        <div class="timeline-number">1</div>
+                        <div class="timeline-title">Same-Day Setup</div>
+                        <div class="timeline-desc">
+                            We configure everything for your business in under 24 hours. Zero technical knowledge required.
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-step">
+                        <div class="timeline-number">2</div>
+                        <div class="timeline-title">AI Takes Over</div>
+                        <div class="timeline-desc">
+                            Responds instantly 24/7 to missed calls, website visitors, and social media. Never miss another lead.
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-step">
+                        <div class="timeline-number">3</div>
+                        <div class="timeline-title">Jobs Roll In</div>
+                        <div class="timeline-desc">
+                            Calendar gets booked, reviews get collected, revenue increases. You focus on the work, AI handles the leads.
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 3rem;">
+                    <h3 style="color: hsl(var(--success));">
+                        Setup once. Profit forever.
+                    </h3>
+                    <p style="color: hsl(var(--muted-foreground)); font-size: 1.2rem; margin-top: 1rem;">
+                        Most clients see their first AI-booked job within 48 hours.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Old vs New Way -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Why Modern Businesses Are Winning</h2>
+                
+                <div class="comparison">
+                    <div class="comparison-card old-way">
+                        <div class="comparison-title">Traditional Contractors</div>
+                        <ul class="comparison-list">
+                            <li>Miss calls during jobs</li>
+                            <li>Slow follow-ups</li>
+                            <li>No website engagement</li>
+                            <li>Few Google reviews</li>
+                            <li>Inconsistent lead nurturing</li>
+                            <li>Work nights and weekends</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-card new-way">
+                        <div class="comparison-title">Smart (AI-Powered)</div>
+                        <ul class="comparison-list">
+                            <li>Instant response to every lead</li>
+                            <li>24/7 availability</li>
+                            <li>Website converts visitors</li>
+                            <li>Automatic review collection</li>
+                            <li>Consistent follow-up system</li>
+                            <li>More time with family</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 3rem;">
+                    <h3 style="color: hsl(var(--primary));">
+                        Which business would you rather compete against?
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Pricing -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Built For Busy Businesses</h2>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-title">Starter</div>
+                        <div class="pricing-price">$197<span style="font-size: 1rem; color: hsl(var(--muted-foreground));">/mo</span></div>
+                        <ul class="pricing-features">
+                            <li>AI text-back for missed calls</li>
+                            <li>Basic website chatbot</li>
+                            <li>Google review automation</li>
+                            <li>Lead capture & follow-up</li>
+                            <li>24/7 AI response</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pricing-card featured">
+                        <div class="pricing-badge">Most Popular</div>
+                        <div class="pricing-title">Pro</div>
+                        <div class="pricing-price">$397<span style="font-size: 1rem; color: hsl(var(--muted-foreground));">/mo</span></div>
+                        <ul class="pricing-features">
+                            <li>Everything in Starter</li>
+                            <li>Advanced AI conversations</li>
+                            <li>Social media automation</li>
+                            <li>Multi-channel lead capture</li>
+                            <li>Priority setup & support</li>
+                            <li>Custom AI training</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <div class="pricing-title">Full Automation</div>
+                        <div class="pricing-price">$697<span style="font-size: 1rem; color: hsl(var(--muted-foreground));">/mo</span></div>
+                        <ul class="pricing-features">
+                            <li>Everything in Pro</li>
+                            <li>AI estimator tool</li>
+                            <li>Advanced CRM integration</li>
+                            <li>Custom workflows</li>
+                            <li>Dedicated account manager</li>
+                            <li>Monthly strategy calls</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="background: hsl(var(--success) / 0.1); border: 1px solid hsl(var(--success) / 0.3); border-radius: 16px; padding: 2rem; margin-top: 3rem; text-align: center;">
+                    <h3 style="color: hsl(var(--success)); margin-bottom: 1rem;">30-Day Performance Guarantee</h3>
+                    <p style="color: hsl(var(--foreground)); font-size: 1.1rem;">
+                        If you don't get 3+ booked calls or 5-star reviews in your first 30 days, we'll refund every penny.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Final CTA -->
+        <div class="slide">
+            <div class="slide-content">
+                <h1>Your Competitors Aren't Waiting — Why Are You?</h1>
+                <h3>Every missed call could've been your next job.</h3>
+                
+                <div style="margin: 4rem 0;">
+                    <button class="cta-button" style="font-size: 1.5rem; padding: 1.5rem 3rem;">
+                        Get Custom Quote
+                    </button>
+                </div>
+                
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <span style="color: hsl(var(--warning));">⭐⭐⭐⭐⭐</span>
+                        <span>4.9★ Rating</span>
+                    </div>
+                    <div class="trust-badge">
+                        <span style="color: hsl(var(--success));">👥</span>
+                        <span>500+ Users</span>
+                    </div>
+                    <div class="trust-badge">
+                        <span style="color: hsl(var(--primary));">🔧</span>
+                        <span>24/7 Support</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 3rem; color: hsl(var(--muted-foreground)); font-size: 1.1rem;">
+                    <p>Join hundreds of contractors already using AI to capture more leads,</p>
+                    <p>book more jobs, and grow their business automatically.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-button" onclick="previousSlide()">‹</button>
+        <button class="nav-button" onclick="nextSlide()">›</button>
+    </div>
+
+    <!-- Slide Counter -->
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">10</span>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+
+        // Touch/swipe navigation for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                previousSlide();
+            }
+        }
+    </script>
+</body>
+</html>
