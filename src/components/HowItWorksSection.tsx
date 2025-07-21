@@ -1,8 +1,11 @@
+"use client"
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Settings, Zap, TrendingUp } from "lucide-react";
 import { CalendarModal } from "./CalendarModal";
 import { useState } from "react";
+import AnimateBox from "./magicui/animate-box";
+import { TextAnimate } from "./magicui/animate-text";
 
 export const HowItWorksSection = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
@@ -12,19 +15,20 @@ export const HowItWorksSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-16">
+          <AnimateBox duration={1} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
               How It Works
               <span className="text-primary block">Simple. Fast. Profitable.</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <TextAnimate duration={1} delay={1} by="character" className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Our done-for-you AI system is designed for busy contractors who want results without the hassle.
-            </p>
-          </div>
+            </TextAnimate>
+          </AnimateBox>
 
           {/* Steps */}
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {/* Step 1 */}
+            <AnimateBox duration={1}>
             <Card className="shadow-card text-center">
               <CardContent className="p-8">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -36,15 +40,17 @@ export const HowItWorksSection = () => {
                 <h3 className="text-xl font-bold mb-4">Same-Day Setup</h3>
                 <p className="text-muted-foreground mb-6">
                   We handle everything. Phone integration, AI training, calendar sync. 
-                  You'll be capturing missed calls within hours, not weeks.
+                  You&apos;ll be capturing missed calls within hours, not weeks.
                 </p>
                 <div className="text-sm text-success font-semibold">
                   ✓ No tech skills needed
                 </div>
               </CardContent>
             </Card>
+            </AnimateBox>
 
             {/* Step 2 */}
+            <AnimateBox duration={1} delay={0.5}>
             <Card className="shadow-card text-center">
               <CardContent className="p-8">
                 <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -63,8 +69,10 @@ export const HowItWorksSection = () => {
                 </div>
               </CardContent>
             </Card>
+            </AnimateBox>
 
             {/* Step 3 */}
+            <AnimateBox duration={1} delay={1}>
             <Card className="shadow-card text-center">
               <CardContent className="p-8">
                 <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -83,17 +91,19 @@ export const HowItWorksSection = () => {
                 </div>
               </CardContent>
             </Card>
+            </AnimateBox>
           </div>
 
           {/* Bottom section */}
           <div className="bg-primary/5 rounded-lg p-8 text-center">
-            <h3 className="text-2xl font-bold mb-4">
-              The companies winning right now aren't the cheapest — they're the fastest, 
+            <TextAnimate duration={1} by="character" as="h3" className="text-2xl font-bold mb-4">
+              The companies winning right now aren&apos;t the cheapest — they&apos;re the fastest, 
               the smartest, and the most up-to-date.
-            </h3>
-            <p className="text-muted-foreground mb-6">
+            </TextAnimate>
+            <TextAnimate duration={1} delay={1} by="character" as="p" className="text-muted-foreground mb-6">
               Stop losing jobs to competitors who respond faster. Get your AI system running today.
-            </p>
+            </TextAnimate>
+            <AnimateBox duration={1} delay={2}>
             <Button 
               size="lg" 
               className="bg-primary hover:bg-primary-dark"
@@ -101,6 +111,7 @@ export const HowItWorksSection = () => {
             >
               Start Your Setup Now
             </Button>
+            </AnimateBox>
           </div>
         </div>
       </div>
