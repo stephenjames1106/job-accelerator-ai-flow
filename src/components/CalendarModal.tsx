@@ -30,7 +30,7 @@ export const CalendarModal = ({ isOpen, onClose }: CalendarModalProps) => {
         </DialogHeader>
         <div className="px-4 py-2 pt-0 overflow-y-auto h-[70vh] scroll-none rounded-lg">
           <iframe 
-            src="https://link.agency-vault.com/widget/booking/M2EOi3mDWD4gPBOgu3G6" 
+            src="https://link.agency-vault.com/widget/booking/pj3ZUPG6XGQCSYuB17VN" 
             className="size-full border-none"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; scroll-top; scroll-bottom"
             allowFullScreen

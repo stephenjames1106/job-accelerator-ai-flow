@@ -7,9 +7,10 @@ interface AnimateBoxProps {
     className?: string;
     delay?: number;
     duration?: number;
+    style?: React.CSSProperties;
 }
 
-const AnimateBox = ({ children, className, delay=0, duration=1, ...props }: AnimateBoxProps) => {
+const AnimateBox = ({ children, className, delay=0, duration=1, style, ...props }: AnimateBoxProps) => {
     const ref = useRef(null);
     const inView = useInView(ref);
     return (
@@ -19,6 +20,7 @@ const AnimateBox = ({ children, className, delay=0, duration=1, ...props }: Anim
             animate={inView ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
             transition={{ duration, delay, ease: "easeIn" }}
             className={className}
+            style={style}
             {...props}
         >
             {children}
