@@ -13,7 +13,7 @@ export const HeroSection = () => {
   const [isHover, setIsHover] = useState(false);
 
   return (
-    <section className="container xl:px-16 relative min-h-screen bg-background flex items-center justify-center overflow-hidden">
+    <section className="container mx-auto xl:px-16 relative min-h-screen bg-background flex items-center justify-center overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left side content */}
