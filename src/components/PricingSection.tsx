@@ -9,6 +9,9 @@ import { ShineBorder } from "./magicui/shine-border";
 import AnimateBox from "./magicui/animate-box";
 import { TextAnimate } from "./magicui/animate-text";
 import { MagicCard } from "./magicui/magic-card";
+import Link from "next/link";
+import Image from "next/image";
+import imgLoader from "@/lib/imgLoader";
 
 export const PricingSection = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
@@ -264,6 +267,11 @@ export const PricingSection = () => {
         isOpen={isCalendarOpen}
         onClose={() => setIsCalendarOpen(false)}
       />
+      <AnimateBox duration={1} className="mx-auto w-fit my-4">
+        <p className="text-muted-foreground flex items-center gap-2">Powered by <Link href="https://devian.in" target="_blank" className="text-primary hover:underline flex items-center gap-2">
+        <Image src="https://devian.in/logo/logo.webp" alt="Devian - Website/App Development Agency" className="size-5 rounded-full" width={20} height={20} loader={imgLoader} />
+        Devian</Link></p>
+      </AnimateBox>
     </section>
   );
 };

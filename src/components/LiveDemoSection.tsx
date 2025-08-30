@@ -7,6 +7,7 @@ import { CalendarModal } from "./CalendarModal";
 import { useState } from "react";
 import AnimateBox from "./magicui/animate-box";
 import { TextAnimate } from "./magicui/animate-text";
+import DevianAd from "./render-ad";
 
 export const LiveDemoSection = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
@@ -40,13 +41,22 @@ export const LiveDemoSection = () => {
           <div className="mb-12">
             <div className="relative">
               {/* Timeline line */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-primary/20 h-full hidden md:block"></div>
+              <DevianAd
+                        size="320x150"
+                        theme="dark"
+                        headline="Need a Website?"
+                        sub="Devian builds websites, apps, and SaaS platforms that scale."
+                      />
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-primary/20 h-full hidden mt-8 md:block"></div>
 
               {/* Timeline steps */}
-              <div className="space-y-12">
+              <div className="space-y-12 mt-12">
                 {/* Step 1 */}
+                
                 <AnimateBox duration={1}>
+                  
                   <div className="flex items-center gap-8 md:gap-12">
+                    
                     <div className="flex-1 md:text-right">
                       <Card className="shadow-card">
                         <CardContent className="p-6">
@@ -72,7 +82,9 @@ export const LiveDemoSection = () => {
                       1
                     </div>
 
-                    <div className="flex-1 hidden md:block"></div>
+                    <div className="flex-1 hidden md:block">
+                      
+                    </div>
                   </div>
                 </AnimateBox>
 
@@ -169,23 +181,23 @@ export const LiveDemoSection = () => {
 
           {/* Bottom CTA */}
           <AnimateBox duration={1} delay={1.5}>
-          <div className="text-center bg-primary/5 rounded-lg p-8">
-            <h3 className="text-2xl font-bold mb-4">
-              Ready to Never Miss Another Job?
-            </h3>
-            <TextAnimate duration={1} delay={1} by="character" className="text-muted-foreground mb-6">
-              AI isn&apos;t coming — it&apos;s already here. And it&apos;s
-              booking jobs for your competitors while you&apos;re still checking
-              voicemails.
-            </TextAnimate>
-            <Button
-              size="lg"
-              className="bg-accent hover:bg-accent/90 text-accent-foreground"
-              onClick={() => setIsCalendarOpen(true)}
-            >
-              Get Started Today
-            </Button>
-          </div>
+            <div className="text-center bg-primary/5 rounded-lg p-8">
+              <h3 className="text-2xl font-bold mb-4">
+                Ready to Never Miss Another Job?
+              </h3>
+              <TextAnimate duration={1} delay={1} by="character" className="text-muted-foreground mb-6">
+                AI isn&apos;t coming — it&apos;s already here. And it&apos;s
+                booking jobs for your competitors while you&apos;re still checking
+                voicemails.
+              </TextAnimate>
+              <Button
+                size="lg"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground"
+                onClick={() => setIsCalendarOpen(true)}
+              >
+                Get Started Today
+              </Button>
+            </div>
           </AnimateBox>
         </div>
       </div>
